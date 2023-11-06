@@ -5,54 +5,47 @@
     "singularName": "article",
     "pluralName": "articles",
     "displayName": "Article",
-    "description": "Create your blog content"
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
+    "Title": {
+      "type": "string",
+      "required": true
     },
-    "description": {
-      "type": "text",
-      "maxLength": 80
+    "RichContent": {
+      "type": "richtext",
+      "required": true
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
+    "Position": {
+      "type": "integer",
+      "required": true
     },
-    "cover": {
+    "Style": {
+      "type": "enumeration",
+      "enum": [
+        "classic",
+        "photo-first",
+        "two-column"
+      ],
+      "required": true,
+      "default": "classic"
+    },
+    "Photo": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ]
     },
-    "author": {
+    "Category": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::author.author",
-      "inversedBy": "articles"
-    },
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "articles"
-    },
-    "blocks": {
-      "type": "dynamiczone",
-      "components": [
-        "shared.media",
-        "shared.quote",
-        "shared.rich-text",
-        "shared.slider"
-      ]
+      "relation": "oneToOne",
+      "target": "api::category.category"
     }
   }
 }
